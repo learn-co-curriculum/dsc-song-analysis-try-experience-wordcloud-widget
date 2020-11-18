@@ -2,5 +2,3 @@ numpy
 ipywidgets
 nbinteract
 wordcloud
-collections
-
