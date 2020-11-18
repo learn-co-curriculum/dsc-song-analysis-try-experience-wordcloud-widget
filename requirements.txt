@@ -3,3 +3,5 @@ ipywidgets
 nbinteract
 wordcloud
 collections
+WordCloud
+OrderedDict
