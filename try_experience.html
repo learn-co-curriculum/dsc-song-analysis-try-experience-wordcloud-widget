@@ -13256,14 +13256,7 @@ div#notebook {
   </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Visualizing-the-frequency">Visualizing the frequency<a class="anchor-link" href="#Visualizing-the-frequency">&#182;</a></h2><p>In order to get a sense of the makeup of the frequency data we just created, a bar chart is created.</p>
-<ul>
-<li>First, the number of items to graph is set, here it is .5 times the length of the list.</li>
-<li>Next, using matplotlibs pyplot (plt) we create a histogram.</li>
-<li>Then, the labels on the x-axis are rotated 45 degrees to make it more readable.</li>
-<li>Finally, the graph is displayed using plt.show()</li>
-</ul>
-<p>By looking at the graph, you can see the words along the bottom (x-axis) and each bar represents the frequency of each word in our list.</p>
+<h2 id="Ordered-Dictionary">Ordered Dictionary<a class="anchor-link" href="#Ordered-Dictionary">&#182;</a></h2><p>In order to get the lyrics organized in descending order it is converted to a special dictionary type called <code>OrderedDict</code>.  This will organize the lyrics in order for us. First the frequency <code>dict</code> is sorted and passed as the argument for the function <code>OrderedDict</code></p>
 
 </div>
 </div>
@@ -13277,10 +13270,71 @@ div#notebook {
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lyrics_list</span><span class="p">)</span><span class="o">*.</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">lyrics_list</span><span class="p">)[:</span><span class="n">size</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">organized_lyrics</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">frequency</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+  </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Visualizing-the-frequency">Visualizing the frequency<a class="anchor-link" href="#Visualizing-the-frequency">&#182;</a></h2><p>In order to get a sense of the makeup of the frequency data we just created, a bar chart is created.</p>
+<ul>
+<li>Two variables are created to set the size of the figure with relation to the number of lyrics</li>
+<li>The number of items to graph is set, here it is .5 times the length of the list.</li>
+<li>Using matplotlibs pyplot (plt) we create a bar chart.</li>
+<li>Then, the labels on the x-axis are rotated 45 degrees to make it more readable.</li>
+<li>Finally, the graph is displayed using plt.show()</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+  
+
+  <div class="
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">make_bar</span><span class="p">(</span><span class="n">number_of_lyrics</span><span class="p">):</span>
+    <span class="n">wide</span> <span class="o">=</span> <span class="n">number_of_lyrics</span><span class="o">*.</span><span class="mi">6</span>
+    <span class="n">high</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">wide</span><span class="p">,</span> <span class="n">high</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">organized_lyrics</span><span class="o">.</span><span class="n">values</span><span class="p">())[:</span><span class="n">number_of_lyrics</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">organized_lyrics</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="n">number_of_lyrics</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+  </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Frequency-Bar-Chart">Frequency Bar Chart<a class="anchor-link" href="#Frequency-Bar-Chart">&#182;</a></h2><p>In the widget below, you can adjust number of lyrics that are graphed.<br>
+Looking at the graph, you can see the words along the bottom (x-axis) and each bar represents the frequency of each word in our list.</p>
+
+</div>
+</div>
+</div>
+
+  
+
+  <div class="
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">interact</span><span class="p">(</span><span class="n">make_bar</span><span class="p">,</span> <span class="n">number_of_lyrics</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">organized_lyrics</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -13297,10 +13351,22 @@ div#notebook {
 
 
 
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
+  <div class="output_subarea output_widget_view ">
+    <button class="js-nbinteract-widget">
+      Loading widgets...
+    </button>
+  </div>
+
+</div>
+
+<div class="output_area">
+
+    
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;function __main__.make_bar(number_of_lyrics)&gt;</pre>
 </div>
 
 </div>
